@@ -1,45 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Student Portfolio</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>School Portal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            background-color: #34495e;
+        }
+
+        nav button {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        nav button:hover {
+            background-color: #2c3e50;
+        }
+
+        .tab {
+            display: none;
+            padding: 20px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #999;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
 
 <header>
-<h1>Student Portfolio</h1>
-<p>Computer Engineering Student</p>
+    <h1>ABC Public School Portal</h1>
+    <p>Welcome to our School Management System</p>
 </header>
 
-<section class="about">
-<h2>About Me</h2>
-<p>Hello! I am a third year Computer Engineering student passionate about web development.</p>
-</section>
+<nav>
+    <button onclick="openTab('home')">Home</button>
+    <button onclick="openTab('students')">Students</button>
+    <button onclick="openTab('contact')">Contact</button>
+</nav>
 
-<section class="skills">
-<h2>Skills</h2>
-<ul>
-<li>HTML</li>
-<li>CSS</li>
-<li>JavaScript</li>
-<li>PHP</li>
-</ul>
-</section>
+<!-- HOME TAB -->
+<div id="home" class="tab active">
+    <h2>About Our School</h2>
+    <p>
+        ABC Public School provides quality education with experienced teachers
+        and modern infrastructure.
+    </p>
 
-<section class="projects">
-<h2>Projects</h2>
-<p>Student Portfolio Management System</p>
-</section>
+    <img src="school.jpg" alt="School Image">
 
-<section class="contact">
-<h2>Contact</h2>
-<p>Email: student@example.com</p>
-</section>
+    <p>
+        Our mission is to nurture students with knowledge, discipline,
+        and moral values.
+    </p>
+</div>
+
+<!-- STUDENTS TAB -->
+<div id="students" class="tab">
+    <h2>Student Records</h2>
+    <button onclick="loadCSV()">Load Student Data</button>
+
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Section</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<!-- CONTACT TAB -->
+<div id="contact" class="tab">
+    <h2>Contact Us</h2>
+    <p><strong>Address:</strong> New Delhi, India</p>
+    <p><strong>Email:</strong> abcschool@gmail.com</p>
+    <p><strong>Phone:</strong> +91 98765 43210</p>
+</div>
 
 <footer>
-<p>© 2025 Student Portfolio</p>
+    © 2026 ABC Public School
 </footer>
+
+<script>
+    function openTab(tabId) {
+        let tabs = document.getElementsByClassName("tab");
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove("active");
+        }
+        document.getElementById(tabId).classList.add("active");
+    }
+
+    function loadCSV() {
+        fetch("students.csv")
+            .then(response => response.text())
+            .then(data => {
+                let rows = data.split("\n");
+                let tableBody = document.querySelector("#studentTable tbody");
+                tableBody.innerHTML = "";
+
+                for (let i = 1; i < rows.length; i++) {
+                    let cols = rows[i].split(",");
+                    if (cols.length >= 4) {
+                        let row = document.createElement("tr");
+
+                        cols.forEach(col => {
+                            let td = document.createElement("td");
+                            td.innerText = col;
+                            row.appendChild(td);
+                        });
+
+                        tableBody.appendChild(row);
+                    }
+                }
+            });
+    }
+</script>
 
 </body>
 </html>
