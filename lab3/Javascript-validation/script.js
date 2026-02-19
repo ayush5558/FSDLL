@@ -1,30 +1,56 @@
-function validateForm() {
+document.getElementById("myForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-var name = document.getElementById("name").value;
-var email = document.getElementById("email").value;
-var password = document.getElementById("password").value;
-var mobile = document.getElementById("mobile").value;
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let gender = document.getElementById("gender").value;
+    let message = document.getElementById("message").value.trim();
 
-if (name === "") {
-alert("Name must not be empty");
-return false;
-}
+    let valid = true;
 
-if (email === "") {
-alert("Email must not be empty");
-return false;
-}
+    // Clear previous messages
+    document.querySelectorAll(".error").forEach(el => el.textContent = "");
+    document.getElementById("successMsg").textContent = "";
 
-if (password.length < 6) {
-alert("Password must be at least 6 characters long");
-return false;
-}
+    // Validation
+    if (name === "") {
+        document.getElementById("nameError").textContent = "Name required";
+        valid = false;
+    }
 
-if (isNaN(mobile) || mobile.length !== 10) {
-alert("Enter valid 10-digit mobile number");
-return false;
-}
+    if (email === "" || !email.includes("@")) {
+        document.getElementById("emailError").textContent = "Valid email required";
+        valid = false;
+    }
 
-alert("Form submitted successfully!");
-return true;
-}
+    if (phone.length !== 10) {
+        document.getElementById("phoneError").textContent = "Enter 10 digit phone";
+        valid = false;
+    }
+
+    if (gender === "") {
+        document.getElementById("genderError").textContent = "Select gender";
+        valid = false;
+    }
+
+    // If all validations pass
+    if (valid) {
+        document.getElementById("successMsg").textContent =
+            "Form submitted successfully ✅";
+
+        let result = document.getElementById("result");
+        result.style.display = "block";
+
+        result.innerHTML = `
+            <h3>Submitted Details</h3>
+            <p><b>Name:</b> ${name}</p>
+            <p><b>Email:</b> ${email}</p>
+            <p><b>Phone:</b> ${phone}</p>
+            <p><b>Gender:</b> ${gender}</p>
+            <p><b>Message:</b> ${message}</p>
+        `;
+
+        document.getElementById("myForm").reset();
+    }
+});
