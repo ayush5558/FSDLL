@@ -1,31 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Student Registration Form</title>
-<script src="script.js"></script>
+    <title>User Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>PRIYA-NAGARGOJE Registration Form</h2>
+<div class="container">
+    <h2>User Registration</h2>
 
-<form onsubmit="return validateForm()">
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Name">
+        <span class="error" id="nameError"></span>
 
-<label>Name:</label><br>
-<input type="text" id="name"><br><br>
+        <input type="email" id="email" placeholder="Email">
+        <span class="error" id="emailError"></span>
 
-<label>Email:</label><br>
-<input type="text" id="email"><br><br>
+        <input type="text" id="phone" placeholder="Phone">
+        <span class="error" id="phoneError"></span>
 
-<label>Password:</label><br>
-<input type="password" id="password"><br><br>
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        <span class="error" id="genderError"></span>
 
-<label>Mobile Number:</label><br>
-<input type="text" id="mobile"><br><br>
+        <textarea id="message" placeholder="Message"></textarea>
 
-<input type="submit" value="Register">
+        <button type="submit">Submit</button>
+    </form>
 
-</form>
+    <p id="successMsg" class="success"></p>
 
+    <div id="result" class="result-box"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
