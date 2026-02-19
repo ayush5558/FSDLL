@@ -1,0 +1,41 @@
+body {
+    font-family: Arial;
+    background: #f0f0f0;
+}
+
+.container {
+    background: white;
+    width: 300px;
+    padding: 20px;
+    margin: 50px auto;
+    border-radius: 8px;
+}
+
+input, select, textarea, button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.result-box {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
